@@ -1,34 +1,34 @@
-// Event listener for form submit
-document.getElementById("uploadForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+const fileInput = document.querySelector('input[type="file"]');
+const form = document.querySelector('form');
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  const files = fileInput.files;
+  const allowedExtensions = ['.qgs', '.cfg', '.png'];
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const fileExtension = file.name.substr(file.name.lastIndexOf('.')).toLowerCase();
     
-    // Get the file and description from the form
-    var file = document.getElementById("projectFile").files[0];
-    var description = document.getElementById("description").value;
-    // Perform some validation on the file and description
-    if (!file) {
-      alert("Please select a file to upload.");
-      return;
+    if (!allowedExtensions.includes(fileExtension)) {
+      alert(`Tipo de archivo no permitido: ${file.name}`);
+      continue;
     }
-    if (!description) {
-      alert("Please provide a description for the project.");
-      return;
-    }
-    
-    // Use the FormData API to send the file and description to the server
-    var formData = new FormData();
-    formData.append("projectFile", file);
-    formData.append("description", description);
-    
-    var xhr = new XMLHttpRequest();
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('project', file);
+    // HTTP POST bidalketa
     xhr.open("POST", "http://localhost/LIZMAP-SERVER-DATA/upload.php", true);
     
     xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-        // Upload successful, show success message
-        alert("Project uploaded successfully!");
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        // Erantzuna
+        alert(this.responseText);
       }
     };
-    
+  
     xhr.send(formData);
-  });
+  }
+});
