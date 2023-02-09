@@ -20,7 +20,7 @@ form.addEventListener('submit', function(event) {
     const formData = new FormData();
     formData.append('project', file);
     // HTTP POST bidalketa
-    xhr.open("POST", "http://localhost/LIZMAP-SERVER-DATA/upload.php", true);
+    xhr.open("POST", "upload.php", true);
     
     xhr.onreadystatechange = function() {
       if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
