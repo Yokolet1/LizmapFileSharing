@@ -82,3 +82,18 @@ body {
   /* line-height: 1em; */
   font-weight: normal;
 }
+/* INPUT */
+.input{
+  display: none;
+}
+/* DRAG AND DROP */
+.drag-drop{
+  display: grid;
+  place-items: center;
+  height: 50vh;
+  text-align: center;
+}
+.dash{
+  border: 2px dashed black;
+  padding: 100px;
+}

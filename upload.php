@@ -1,5 +1,4 @@
 <?php
-// echo '<h1>'.__DIR__.'asd</h1>';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (!isset($_FILES['project'])) {
     http_response_code(400);

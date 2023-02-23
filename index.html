@@ -16,12 +16,18 @@
         <h1>Fitxategiak igo</h1>
       </div>
     </div>
-    <div class="main">
-      <form>
-          <input  type="file" id="secondInput" name="projects[]" multiple />
-          <!-- <label for="secondInput">Aukeratu zure proiektua</label> -->
-        <input type="submit" class="btn" />
-      </form>
+    <div class="drag-drop">
+        <input
+          class="input"
+          type="file"
+          id="secondInput"
+          name="projects[]"
+          multiple
+        />
+        <div class="dash">
+          <p>Zure fitxategia arrastratu</p>
+          <button class="btn">Browser file</button>
+        </div>
     </div>
     <script src="main.js"></script>
   </body>
