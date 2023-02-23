@@ -2,6 +2,7 @@
 const dropArea = document.querySelector(".dash");
 const fileSelector = document.querySelector(".input");
 const button = document.querySelector(".btn");
+const allowedExtensions = ['.qgs', '.cfg', '.png'];
 let files;
 
 button.onclick = ()=>{
@@ -9,12 +10,11 @@ button.onclick = ()=>{
 }
 // Whe the data is change in input[type=file] is goingo to save the data and call the function
 fileSelector.addEventListener("change", function () {
+    document.getElementById("eran").innerHTML="";
     files = this.files;
-    uploadFiles(files);
+    let dir = document.querySelector(".dirname").value;
+    uploadFiles(files,dir);
 });
-
-//Allowed extension
-const allowedExtensions = ['.qgs', '.cfg', '.png'];
 //Drag Over
 dropArea.addEventListener("dragover", (e) => {
     e.preventDefault();
@@ -27,13 +27,13 @@ dropArea.addEventListener("dragleave", (e) => {
 dropArea.addEventListener("drop", (e)=>{
     e.preventDefault();
     //Files array
+    document.getElementById("eran").innerHTML="";
     files = e.dataTransfer.files;
-    uploadFiles(files);
+    let dir = document.querySelector(".dirname").value;
+    console.log(files);
+    uploadFiles(files,dir);
 });
-function uploadFiles(file) {
-    console.log(file);
-    // for(let i in file){
-    // }
+function uploadFiles(file,dir) {
     for (let i = 0; i < file.length; i++) {
         const element = file[i];
         const fileExtension = element.name.substr(element.name.lastIndexOf('.')).toLowerCase();
@@ -47,13 +47,16 @@ function uploadFiles(file) {
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
         formData.append('project', element);
+        formData.append('kokalekua',dir);
+        console.log(formData);
         // HTTP POST bidalketa
         xhr.open("POST", "upload.php", true);
         
         xhr.onreadystatechange = function() {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             // Erantzuna
-            alert(this.responseText);
+            //alert(this.responseText);
+            document.getElementById("eran").innerHTML+=this.responseText+"<br>";
         }
         };
 

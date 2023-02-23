@@ -97,3 +97,8 @@ body {
   border: 2px dashed black;
   padding: 100px;
 }
+.erantzunak{
+  text-align: center;
+  color: green;
+  display: block;
+}
