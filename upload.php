@@ -7,16 +7,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if ($_POST['kokalekua']=="") {
-    //$dir = "world/";
-    $dir = "/server/";
+    $dir = "/world/";
+    //$dir = "/server/";
   }else {
-    $dir =__DIR__ . '/server/'.$_POST['kokalekua'];
+    $dir ="/home/urtzi/Dokumentuak/projects/world/".$_POST['kokalekua'];
     if(!is_dir($dir)){
       mkdir($dir);
     }
     //mkdir ("/home/urtzi/Dokumentuak/projects/world/".$_POST['kokalekua'],0755);
-    //$dir = "world/".$_POST['kokalekua'].'/';
-    $dir = "/server/".$_POST['kokalekua'].'/';
+    $dir = "/world/".$_POST['kokalekua'].'/';
+    //$dir = "/server/".$_POST['kokalekua'].'/';
   }
   $file = $_FILES['project'];
   $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
@@ -25,10 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    echo 'Fitxategi mota ez baimendua';
    return;
   }
-  $target_dir = __DIR__ . $dir;
-  // $target_dir = '/home/urtzi/Dokumentuak/projects/$dir';
+  //$target_dir = __DIR__ . $dir;
+  $target_dir = '/home/urtzi/Dokumentuak/projects'.$dir;
   $target_file = $target_dir . basename($file['name']);
-  if (!move_uploaded_file($file['tmp_name'], $target_file)) {
+  echo $target_file;
+if (!move_uploaded_file($file['tmp_name'], $target_file)) {
    http_response_code(500);
    echo 'Error: Fitxategia igotzerakoan';
    return;
